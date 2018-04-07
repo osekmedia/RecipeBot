@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.osekmedia.recipeBot.repositories.CategoryRepository;
 import com.osekmedia.recipeBot.repositories.RecipeRepository;
@@ -34,6 +35,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     }
     
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
     	
         recipeRepository.saveAll( getRecipes() );
