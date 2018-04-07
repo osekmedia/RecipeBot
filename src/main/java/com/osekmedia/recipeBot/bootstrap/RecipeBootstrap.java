@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import com.osekmedia.recipeBot.repositories.CategoryRepository;
 import com.osekmedia.recipeBot.repositories.RecipeRepository;
 import com.osekmedia.recipeBot.repositories.UnitOfMeasureRepository;
-import com.osekmedia.recipeBot.services.RecipeServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,6 +37,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     public void onApplicationEvent(ContextRefreshedEvent event) {
     	
         recipeRepository.saveAll( getRecipes() );
+        
+        log.debug("Adding bootstrap data");
         
     }
     
@@ -67,7 +68,6 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         validatCategory( americanCategoryOptional );
         validatCategory( mexicanCategoryOptional );
         
-        log.debug("Bootstap - adding guac recipe");
         Recipe guacRecipe = new Recipe();
         guacRecipe.setDescription( "Perfect Guacamole" );
         guacRecipe.setPrepTime(10);
